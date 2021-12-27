@@ -15,7 +15,7 @@ export const overrideOS: boolean = true
 export const nextFeatureImages: boolean = true
 export const nextInlineImages: boolean = true
 export const imageQuality: number = 80
-export const sourceImages: boolean = false
+export const sourceImages: boolean = true
 
 // RSS
 export const rssFeed: boolean = true

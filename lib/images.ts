@@ -110,6 +110,7 @@ export const imageDimensionsFromFile = async (file: string, noCache?: boolean) =
 const imageRoot = join(process.cwd(), 'public/images')
 
 export const normalizedImageUrl = async (url: string) => {
+  console.log("called with", url)
   const localhostRegExp = /^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/.*)*\/(.*)$/
   const filename = url.match(localhostRegExp)?.reverse()[0]
 
