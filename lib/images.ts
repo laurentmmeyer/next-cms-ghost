@@ -122,7 +122,7 @@ export const normalizedImageUrl = async (url: string) => {
       if (!response.ok) throw new Error(`images.ts: unexpected response ${response.statusText}`)
       await streamPipeline(response.body, createWriteStream(filePath))
     }
-    return `${processEnv.siteUrl}/images/${filename}`
+    return `/images/${filename}`
   }
   return url.startsWith('//') ? `https:${url}` : url
 }
