@@ -14,7 +14,7 @@ export const HeaderIndex = ({ settings }: HeaderIndexProps) => {
   const text = get(getLang(settings.lang))
   const site = settings
   const siteLogo = site.logoImage
-  const coverImg = site.cover_image || ''
+  const coverImg = site.coverImage?.url || ''
   const title = text(`SITE_TITLE`, site.title)
 
   const { processEnv } = settings

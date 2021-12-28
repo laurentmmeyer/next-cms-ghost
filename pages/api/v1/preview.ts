@@ -31,7 +31,6 @@ const Preview = async (req: NextApiRequest, res: NextApiResponse): Promise<NextA
 
   const slug = Array.isArray(req.query.slug) ? req.query.slug[0] : req.query.slug
   const url = await verifySlug(slug)
-  console.log(url)
 
   if (!url) {
     return res.status(401).json({ message: 'Invalid slug' })
