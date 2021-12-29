@@ -18,10 +18,10 @@ export const imageQuality: number = 80
 export const sourceImages: boolean = true
 
 // RSS
-export const rssFeed: boolean = true
+export const rssFeed: boolean = false
 
 // Ghost Member Subscriptions
-export const memberSubscriptions: boolean = true
+export const memberSubscriptions: boolean = false
 
 // Commenting system
 export type CommentingSystem = 'commento' | 'disqus' | null
@@ -35,7 +35,7 @@ export const prism: boolean = true
 export const prismIgnoreMissing: boolean = true
 
 // Contact Page
-export const contactPage: boolean = true
+export const contactPage: boolean = false
 export const customPage = {}
 
 // Table of Contents
@@ -45,8 +45,9 @@ export const maxDepth: number = 2
 // Custom site navigation (default: [], label is case sensitive)
 // Override: [{ label: 'Home', url: '/' }]
 // Add new: [{ label: 'Contact', url: '/contact' }]
-import { NavItem } from '@lib/ghost'
-export const customNavigation: NavItem[] = [{ label: 'Contact', url: '/contact' }]
+import {NavItem} from '@lib/ghost'
+
+export const customNavigation: NavItem[] = [{label: 'Blog', url: '/'}, {label: 'CV', url: '/cv.pdf'}]
 
 // Incremental Static Regenerations (ISR)
 // Note: must be disbaled, when using `next export`

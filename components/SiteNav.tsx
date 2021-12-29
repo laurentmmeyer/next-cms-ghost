@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
 import Link from 'next/link'
-import { resolve } from 'url'
+import {resolve} from 'url'
 
-import { Navigation } from '@components/Navigation'
-import { SocialLinks } from '@components/SocialLinks'
-import { DarkMode } from '@components/DarkMode'
-import { SubscribeButton } from '@components/SubscribeButton'
-import { getLang, get } from '@utils/use-lang'
-import { GhostSettings, NavItem, NextImage } from '@lib/ghost'
+import {Navigation} from '@components/Navigation'
+import {SocialLinks} from '@components/SocialLinks'
+import {DarkMode} from '@components/DarkMode'
+import {SubscribeButton} from '@components/SubscribeButton'
+import {getLang, get} from '@utils/use-lang'
+import {GhostSettings, NavItem, NextImage} from '@lib/ghost'
 
 export interface SiteNavProps {
   settings: GhostSettings
@@ -16,15 +16,15 @@ export interface SiteNavProps {
   postTitle?: string
 }
 
-export const SiteNav = ({ settings, className, postTitle }: SiteNavProps) => {
+export const SiteNav = ({settings, className, postTitle}: SiteNavProps) => {
   const text = get(getLang(settings.lang))
-  const { processEnv } = settings
-  const { customNavigation, nextImages, memberSubscriptions } = processEnv
+  const {processEnv} = settings
+  const {customNavigation, nextImages, memberSubscriptions} = processEnv
   const config: {
     overwriteNavigation: NavItem[]
     addNavigation: NavItem[]
   } = {
-    overwriteNavigation: customNavigation || [],
+    overwriteNavigation: [],
     addNavigation: customNavigation || [],
   }
   const site = settings
@@ -33,18 +33,18 @@ export const SiteNav = ({ settings, className, postTitle }: SiteNavProps) => {
   const secondaryNav = site.secondary_navigation && 0 < site.secondary_navigation.length
   const siteLogo = site.logoImage
 
-  const navigation = site.navigation
+  const navigation: Array<{ label: string; url: string; }> | undefined = []
 
   // overwrite navigation if specified in options
   const labels = navigation?.map((item) => item.label)
-  if (labels && labels.length > 0 && config.overwriteNavigation && config.overwriteNavigation.length > 0) {
-    config.overwriteNavigation.map((item) => {
-      const index = (item.label && labels.indexOf(item.label)) || -1
-      if (index > -1 && navigation && navigation[index]) {
-        navigation[index].url = item.url
-      }
-    })
-  }
+  // if (labels && labels.length > 0 && config.overwriteNavigation && config.overwriteNavigation.length > 0) {
+  //   config.overwriteNavigation.map((item) => {
+  //     const index = (item.label && labels.indexOf(item.label)) || -1
+  //     if (index > -1 && navigation && navigation[index]) {
+  //       navigation[index].url = item.url
+  //     }
+  //   })
+  // }
 
   // add navigation if specified in options
   const urls = navigation?.map((item) => item.url)
@@ -55,7 +55,7 @@ export const SiteNav = ({ settings, className, postTitle }: SiteNavProps) => {
   // targetHeight is coming from style .site-nav-logo img
   const targetHeight = 21
   const calcSiteLogoWidth = (image: NextImage, targetHeight: number) => {
-    const { width, height } = image.dimensions
+    const {width, height} = image.dimensions
     return (targetHeight * width) / height
   }
 
@@ -72,33 +72,34 @@ export const SiteNav = ({ settings, className, postTitle }: SiteNavProps) => {
                     width: `${calcSiteLogoWidth(siteLogo, targetHeight)}px`,
                   }}
                 >
-                  <Image className="site-nav-logo" src={siteLogo.url} alt={title} layout="responsive" quality={nextImages.quality} {...siteLogo.dimensions} />
+                  <Image className="site-nav-logo" src={siteLogo.url} alt={title} layout="responsive"
+                         quality={nextImages.quality} {...siteLogo.dimensions} />
                 </div>
               </a>
             ) : site.logo ? (
               <a className="site-nav-logo">
-                <img src={site.logo} alt={title} />
+                <img src={site.logo} alt={title}/>
               </a>
             ) : (
               <a className="site-nav-logo">{title}</a>
             )}
           </Link>
           <div className="site-nav-content">
-            <Navigation data={navigation} />
+            <Navigation data={navigation}/>
             {postTitle && <span className={`nav-post-title ${site.logo ? `` : `dash`}`}>{postTitle}</span>}
           </div>
         </div>
       </div>
       <div className="site-nav-right">
         {secondaryNav ? (
-          <Navigation data={site.secondary_navigation} />
+          <Navigation data={site.secondary_navigation}/>
         ) : (
           <div className="social-links">
-            <SocialLinks {...{ siteUrl, site }} />
+            <SocialLinks {...{siteUrl, site}} />
           </div>
         )}
-        <DarkMode {...{ settings }} />
-        {memberSubscriptions && <SubscribeButton {...{ lang: settings.lang }} />}
+        <DarkMode {...{settings}} />
+        {memberSubscriptions && <SubscribeButton {...{lang: settings.lang}} />}
       </div>
     </nav>
   )

@@ -10,25 +10,13 @@ interface SocialLinkProps {
 }
 
 export const SocialLinks = ({ siteUrl, site }: SocialLinkProps) => {
-  const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
-  const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
-
-  const { processEnv } = site
-  const { memberSubscriptions } = processEnv
+  const twitterUrl = site.twitter && `https://twitter.com/Laurent_m_Meyer`
 
   return (
     <>
-      {site.facebook && (
-        <a href={facebookUrl} className="social-link social-link-fb" target="_blank" rel="noopener noreferrer" title="Facebook">
-          <FacebookIcon />
-        </a>
-      )}
-      {site.twitter && (
         <a href={twitterUrl} className="social-link social-link-tw" target="_blank" rel="noopener noreferrer" title="Twitter">
           <TwitterIcon />
         </a>
-      )}
-      {!memberSubscriptions && <SocialRss {...{ siteUrl }} />}
     </>
   )
 }

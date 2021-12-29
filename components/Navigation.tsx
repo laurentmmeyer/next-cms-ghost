@@ -22,7 +22,7 @@ export const Navigation = ({ data, navClass }: NavigationProps) => {
   const items: ReactFragment[] = []
 
   data?.map((navItem, i) => {
-    if (navItem.url.match(/^\s?http(s?)/gi)) {
+    if (navItem.url.match(/^\s?http(s?)/gi) || navItem.url.match(/\.pdf/gi)) {
       items.push(
         <li key={i} className={`nav-${navItem.label.toLowerCase()}`} role="menuitem">
           <a className={navClass} href={navItem.url} target="_blank" rel="noopener noreferrer">
