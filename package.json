@@ -37,7 +37,8 @@
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "postbuild": "next-sitemap",
-    "serve": "serve out"
+    "serve": "serve out",
+    "deploy": "yarn export && cd out && aws s3 cp . s3://meyer-laurent-blog/ --recursive --exclude \"*/\""
   },
   "dependencies": {
     "@tryghost/content-api": "^1.5.16",
