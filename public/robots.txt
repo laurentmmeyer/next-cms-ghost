@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://next.jamify.org
+Host: https://meyer-laurent.com
 
 # Sitemaps
-Sitemap: https://next.jamify.org/sitemap.xml
+Sitemap: https://meyer-laurent.com/sitemap.xml
