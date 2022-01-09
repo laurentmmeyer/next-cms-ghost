@@ -23,12 +23,12 @@ const options = {
     Image: (props: ComponentProps) => <NextImage {...(props as ComponentPropsWithNode)} />,
     script: (props: ComponentProps) => {
       const properties = props as ScriptNode
-      const myRegexp = new RegExp(gist_regex, );
+      const myRegexp = new RegExp(gist_regex);
       const match = myRegexp.exec(properties.src);
       if (!!match && match.length > 1){
         return <ReactGist id={match[1]}/>
       }
-      return <div/>
+      return null;
     }
   },
 }
