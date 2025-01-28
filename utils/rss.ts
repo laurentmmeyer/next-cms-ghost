@@ -55,7 +55,7 @@ const generateItem = ({ post, settings }: ItemProps) => {
   } = post
   const cmsUrl = settings.url || ''
   const postUrl = canonical_url || url
-  const itemUrl = postUrl?.replace(cmsUrl, siteUrl)
+  const itemUrl = (postUrl?.replace(cmsUrl, siteUrl) || '').replace(/\/$/, '');
 
   // ToDo:
   // const transformedHtml = post.htmlAst
@@ -63,6 +63,28 @@ const generateItem = ({ post, settings }: ItemProps) => {
   html = html?.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
   const htmlContent = cheerio.load(html || '', { decodeEntities: false, xmlMode: true })
   const imageUrl = post.feature_image
+
+  // Process <img> tags inside the HTML
+  htmlContent('img').each((_, img) => {
+    const imgElement = htmlContent(img);
+    const originalSrc = imgElement.attr('src');
+
+    if (originalSrc) {
+      const parsedImageUrl = new URL(originalSrc);
+      const imageName = parsedImageUrl.pathname.split('/').pop(); // Extract only the filename
+      const newSrc = `${siteUrl}/images/${imageName}`; // Prepend siteUrl to the filename
+
+      // Update the src attribute
+      imgElement.attr('src', newSrc);
+      imgElement.removeAttr('srcset'); // Remove srcset attribute if present
+      imgElement.removeAttr('class'); // Remove srcset attribute if present
+      imgElement.removeAttr('loading'); // Remove srcset attribute if present
+      imgElement.removeAttr('width'); // Remove srcset attribute if present
+      imgElement.removeAttr('sizes'); // Remove srcset attribute if present
+      imgElement.removeAttr('alt'); // Remove srcset attribute if present
+      imgElement.removeAttr('height'); // Remove srcset attribute if present
+    }
+  });
 
   const tagsFilter = (tags: Tag[]) => tags
     .filter(({ name }) => !!name && name.substr(0, 5) !== 'hash-')

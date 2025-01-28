@@ -32,7 +32,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "rm public/rss.xml && cross-env IS_EXPORT=true next build && next-sitemap && next export && cp public/rss.xml out/rss.xml",
+    "export": "rm -f public/rss.xml && cross-env IS_EXPORT=true next build && next-sitemap && next export && cp public/rss.xml out/rss.xml",
     "clean": "rm -rf .cache public/images",
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint . --ext ts --ext tsx --ext js",
