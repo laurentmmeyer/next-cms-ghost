@@ -1,6 +1,6 @@
 // Defaults for meta, if not configured in CMS
-export const siteTitleMeta = 'Jamify - Next.js Headless Ghost with Casper skin'
-export const siteDescriptionMeta = 'Jamify blog system powered by Next.js and headless Ghost featuring Casper skin.'
+export const siteTitleMeta = `Laurent Meyer's Devblog`
+export const siteDescriptionMeta = 'Some insights about my journey as a software engineer'
 
 // Defaults, if not configured in CMS
 // Images can be fund in the /public folder

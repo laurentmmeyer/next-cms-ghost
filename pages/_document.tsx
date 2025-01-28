@@ -21,7 +21,7 @@ export default class MyDocument extends Document {
           <link
             rel="alternate"
             type="application/rss+xml"
-            title="Jamify RSS Feed"
+            title="Laurent Meyer's Devblog"
             href={`${resolve(processEnv.siteUrl, 'rss.xml')}`}
           />
         </Head>

@@ -17,7 +17,7 @@ export const generateRSSFeed = ({ posts, settings }: FeedProps) => {
     title: siteTitleMeta,
     description: siteDescriptionMeta,
     generator: `Jamify Blog Starter 2.0`,
-    feed_url: resolve(siteUrl, 'rss/'),
+    feed_url: resolve(siteUrl, 'rss.xml'),
     site_url: resolve(siteUrl, ''),
     image_url: resolve(siteUrl, siteIcon),
     ttl: 60,
@@ -45,7 +45,6 @@ const generateItem = ({ post, settings }: ItemProps) => {
   const {
     url = '',
     canonical_url,
-    html,
     title = '',
     excerpt: description = '',
     id: guid,
@@ -60,6 +59,8 @@ const generateItem = ({ post, settings }: ItemProps) => {
 
   // ToDo:
   // const transformedHtml = post.htmlAst
+  let html = post.html;
+  html = html?.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
   const htmlContent = cheerio.load(html || '', { decodeEntities: false, xmlMode: true })
   const imageUrl = post.feature_image
 
