@@ -20,6 +20,7 @@ const options = {
   passNode: true,
   components: {
     Link: (props: ComponentProps) => <NextLink {...(props as ComponentPropsWithNode)} />,
+  a: (props: ComponentProps) => <a target="_blank" rel="noopener noreferrer"{...(props as ComponentPropsWithNode)}/>,
     Image: (props: ComponentProps) => <NextImage {...(props as ComponentPropsWithNode)} />,
     script: (props: ComponentProps) => {
       const properties = props as ScriptNode
