@@ -41,6 +41,7 @@
     "deploy": "yarn export && cd out && aws s3 cp . s3://meyer-laurent-blog/ --recursive --exclude \"*/\""
   },
   "dependencies": {
+    "@next/third-parties": "^15.1.6",
     "@tryghost/content-api": "^1.5.16",
     "cheerio": "^1.0.0-rc.10",
     "crypto-hash": "^2.0.1",
