@@ -12,7 +12,6 @@ import { getAllPosts, getAllSettings, GhostPostOrPage, GhostPostsOrPages, GhostS
 import { seoImage, ISeoImage } from '@meta/seoImage'
 
 import { BodyClass } from '@helpers/BodyClass'
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 /**
  * Main index page (home page)
@@ -39,11 +38,11 @@ export default function Index({ cmsData }: IndexProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
+
   const { settings, posts, seoImage, bodyClass } = cmsData
 
   return (
     <>
-      <GoogleAnalytics gaId="G-NC259RX0QQ"  />
 
       <SEO {...{ settings, seoImage }} />
       <StickyNavContainer
