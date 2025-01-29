@@ -6,6 +6,7 @@ import { GhostSettings } from '@lib/ghost'
 import { Author, PostOrPage, Tag } from '@tryghost/content-api'
 import { ISeoImage } from '@meta/seoImage'
 import { siteTitleMeta, siteDescriptionMeta, siteIcon } from '@meta/siteDefaults'
+import {useEffect} from "react";
 
 interface SEOProps {
   title?: string
@@ -35,6 +36,20 @@ export const SEO = (props: SEOProps) => {
   const description = d || meta_description || settingsDescription || siteDescriptionMeta
 
   const jsonLd = getJsonLd({ ...props, title, description, seoImage })
+
+  useEffect(()=> {
+    const raw = JSON.stringify({
+      "page": window.location.pathname,
+    });
+
+    const requestOptions = {
+      method: 'POST',
+      body: raw,
+    };
+
+    fetch("https://meyer-laurent-analytics.laurent-2b0.workers.dev/", requestOptions)
+  }, [])
+
 
   return (
     <Head>
