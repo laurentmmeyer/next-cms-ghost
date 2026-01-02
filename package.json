@@ -38,7 +38,8 @@
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "postbuild": "next-sitemap",
     "serve": "serve out",
-    "deploy": "yarn export && cd out && aws s3 cp . s3://meyer-laurent-blog/ --recursive --exclude \"*/\""
+    "export-serve": "kill -9 $(lsof -t -i:3000) || true && npm run export && (npm run serve &) && sleep 3 && open http://localhost:3000",
+    "deploy": "yarn export && cd out && aws s3 sync . s3://meyer-laurent-blog/ --exclude \"*/\""
   },
   "dependencies": {
     "@next/third-parties": "^15.1.6",
